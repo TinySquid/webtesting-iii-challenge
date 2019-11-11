@@ -28,6 +28,36 @@ describe('<Controls />', () => {
     expect(getByText(/Lock Gate/)).toBeTruthy();
   });
 
+  it('runs callback function on button click', () => {
+    const mockProps = { locked: false, closed: false };
+    const mockPropsClosed = { locked: false, closed: true };
+
+    const gateSpy = jest.fn();
+
+    const { getByText, rerender } = render(<Controls {...mockProps} toggleClosed={gateSpy} />);
+
+    expect(gateSpy).not.toHaveBeenCalled(); //Sanity check
+
+    const toggleGate = getByText(/Close Gate/);
+
+    fireEvent.click(toggleGate);
+
+    expect(gateSpy).toHaveBeenCalled();
+
+    const lockSpy = jest.fn();
+
+    rerender(<Controls {...mockPropsClosed} toggleLocked={lockSpy} />);
+
+    expect(lockSpy).not.toHaveBeenCalled(); //Sanity check
+
+    const toggleLock = getByText(/Lock Gate/);
+
+    fireEvent.click(toggleLock);
+
+    expect(lockSpy).toHaveBeenCalled();
+
+  });
+
   it('sets correct button text and disabled state to reflect gate state', () => {
     const mockPropsClosed = { locked: false, closed: true, };
     const mockPropsOpen = { locked: false, closed: false };
