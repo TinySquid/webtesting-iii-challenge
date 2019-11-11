@@ -8,7 +8,7 @@
 
 //Get our test library imported
 import React from 'react';
-import 'jest-dom';
+// import 'jest-dom';
 import { cleanup, render, fireEvent } from 'react-testing-library';
 
 //Import the component to test
@@ -72,8 +72,8 @@ describe('<Controls />', () => {
     expect(toggleLock.disabled).toBe(true);
     expect(toggleGate.disabled).toBe(false);
 
-    expect(toggleLock.textContent).toMatch(/Lock Gate/)
-    expect(toggleGate.textContent).toMatch(/Close Gate/)
+    expect(toggleLock.textContent).toMatch(/Lock Gate/);
+    expect(toggleGate.textContent).toMatch(/Close Gate/);
 
     //Render a closed and unlocked gate.
     rerender(<Controls {...mockPropsClosed} />);
@@ -83,8 +83,8 @@ describe('<Controls />', () => {
     expect(toggleGate.disabled).toBe(false);
 
     // expect(toggleLock.textContent).toMatch(/Unlock Gate/i); //Sanity check
-    expect(toggleLock.textContent).toMatch(/Lock Gate/)
-    expect(toggleGate.textContent).toMatch(/Open Gate/)
+    expect(toggleLock.textContent).toMatch(/Lock Gate/);
+    expect(toggleGate.textContent).toMatch(/Open Gate/);
 
     //Render a closed and locked gate.
     rerender(<Controls {...mockPropsLocked} />);
